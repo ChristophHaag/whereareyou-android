@@ -1,0 +1,52 @@
+===
+Why?
+===
+
+* Many, many apps on the play store already.
+* closest one to what I imagine: https://play.google.com/store/apps/details?id=com.fourpg.nomad
+* all use some sort of 3rd party website, require registration, use sms, send links to google maps, or use social networks
+* More of a p2p approach, always try to make direct connections over the internet if possible (Maybe hole punching)
+* Try to make it as private as possible
+
+===
+Principle
+===
+
+* Ability to ask every contact in contact list "where are you"
+  * Support as many channels as possible: through google account, sms, email, social media, telephone number (consider not copying and upsetting whatsapp and forgeability)
+  * send and receive IPs, try direct connection first (mobile devices might be behind a provider NAT), remember each other's IP and send new IP in case it changes (mobile internet -> wifi)
+  * Fallback server for when no direct connection is possible
+* If Contact doesn't have the app, ask whether contact should receive link to website that has some of the functionality (low priority)
+* Optionally set up pgp keys for encrypting every request and every location update (or use different encryption that works with no prior setup, i.e. diffie hellman key exchange/rsa)
+
+===
+Functionality of the app
+===
+
+* User can request location of one or more contacts
+* Contact receives notification that User wants to access their location once or continuously
+* Contact can
+  * discard the request at all
+  * send feedback to have seen the request but chosen to ignore it
+  * deny the request
+  * accept the request and send one location update
+  * accept the request and send continuous location updates (Contact should have freedom to choose, regardless of what User specified)
+* Contact should be able to make the same request synchronously
+* Contact's smartphone sends location update once or continuously with a configurable frequency (simple slider)
+* Contact can abort continuous update at any point
+* User can
+  * view only current location of the last update
+  * view a trail of when (if so) the Contact started sharing continuously for easier estimating the path
+  * temporarily disable viewing the location of any Contact
+
+===
+Keep in mind
+===
+
+* Some kind of service that doesn't drain the battery
+* Push messages should still be received in a matter of seconds
+* Show notification icon while sharing the location and while receiving location updates
+* Authentication scheme to make sure requests are not forged. (PGP keys should be sufficient, but maybe look at OTR authentication)
+* allow users to set up their own fallback server, allow alternative client implementations
+  * documented json protocol
+  * xmpp (google talk, but not so that it clutters the chat, perhaps try to set up xmpp resource and only use the specific resource for communication)
